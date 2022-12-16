@@ -11,31 +11,26 @@ export default class TripEventsPresenter {
   sortFormComponent = new SortFormView();
   newPointFormComponent = new NewPointFormView();
   eventListComponent = new EventListView();
-  editEventFormComponent = new EditEventFormView();
 
-  constructor({tripEventsContainer, filtersFormContainer}){
+  constructor({tripEventsContainer, filtersFormContainer, pointsModel}){
     this.filtersFormContainer = filtersFormContainer;
     this.tripEventsContainer = tripEventsContainer;
+    this.pointsModel = pointsModel;
   }
 
   init() {
-    render(new FiltersFormView(), this.filtersFormContainer); // Фильтры
-    render(this.sortFormComponent, this.tripEventsContainer); // Форма сортировки
-    render(this.eventListComponent, this.tripEventsContainer); // Список ивентов
+    this.eventsPoint = [...this.pointsModel.getPoints()];
+    this.destinations = [...this.pointsModel.getDestinationData()];
+    this.offers = [...this.pointsModel.getOffers()];
+    this.mockData = this.pointsModel.getData();
 
-    // Заполняем список
-    for (let i = 0; i < 4; i++) {
-      if (i === 0) {
-        render(this.newPointFormComponent, this.eventListComponent.getElement()); // Форма создания нового ивента
-        continue;
-      }
+    render(new FiltersFormView(), this.filtersFormContainer);
+    render(this.sortFormComponent, this.tripEventsContainer);
+    render(this.eventListComponent, this.tripEventsContainer);
+    render(new EditEventFormView({point: this.mockData.points[0], pointDestinations: this.mockData.destinations, currentOffers: this.mockData.offers}), this.eventListComponent.getElement());
 
-      if(i === 2) {
-        render(this.editEventFormComponent, this.eventListComponent.getElement());
-        continue;
-      }
-
-      render(new EventItemView, this.eventListComponent.getElement());
+    for (let i = 1; i < this.eventsPoint.length; i++) {
+      render(new EventItemView({point: this.mockData.points[i], pointDestinations: this.mockData.destinations, currentOffers: this.mockData.offers}), this.eventListComponent.getElement());
     }
   }
 }
