@@ -1,8 +1,8 @@
-import { humanizePointDate, getTemplateData } from '../utils';
+import { humanizePointDate, getDataForTemplate } from '../utils';
 import { DATE_FORMAT } from '../const';
 
 export default function createEventItemTemplate (templateData) {
-  const {point, currnetDestination, availableOffers} = getTemplateData(templateData);
+  const {point, currnetDestination, availableOffers} = getDataForTemplate(templateData);
 
   return (
     `<li class="trip-events__item">

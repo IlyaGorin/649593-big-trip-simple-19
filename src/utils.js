@@ -8,7 +8,7 @@ function humanizePointDate(date, dateFormat) {
   return dayjs(date).format(dateFormat);
 }
 
-function getTemplateData(data) {
+function getDataForTemplate(data) {
   const {point, pointDestinations, currentOffers} = data;
   const {destination, type} = point;
   const currnetDestination = pointDestinations.find((pointDestination) => pointDestination.id === destination);
@@ -21,4 +21,4 @@ function getTemplateData(data) {
   };
 }
 
-export {getRandomArrayElement , humanizePointDate, getTemplateData};
+export {getRandomArrayElement , humanizePointDate, getDataForTemplate};

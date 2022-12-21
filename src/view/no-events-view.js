@@ -1,10 +1,18 @@
 import { createElement } from '../render';
-import createNewPointFormTemplate from '../templates/new-point-form-template';
-export default class NewPointFormView {
+
+function createNoEventsTemplate() {
+  return (
+    `<p class="trip-events__msg">
+      Click New Event to create your first point
+    </p>`
+  );
+}
+
+export default class NoEventsView {
   #element = null;
 
   get template() {
-    return createNewPointFormTemplate();
+    return createNoEventsTemplate();
   }
 
   get element() {

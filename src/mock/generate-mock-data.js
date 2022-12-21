@@ -1,11 +1,11 @@
-import { mockOffers } from './offers';
-import { mockPoints } from './point';
-import { mockDestinations } from './destination';
+import { MOCK_OFFERS } from './offers';
+import { MOCK_POINTS } from './points';
+import { MOCK_DESTINATIONS } from './destination';
 
 export default function generateMockData () {
   return {
-    offers: [...mockOffers],
-    points: [...mockPoints],
-    destinations: [...mockDestinations],
+    offers: [...MOCK_OFFERS],
+    points: [...MOCK_POINTS],
+    destinations: [...MOCK_DESTINATIONS],
   };
 }
