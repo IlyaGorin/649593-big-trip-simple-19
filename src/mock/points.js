@@ -1,4 +1,4 @@
-const mockPoints = [
+const MOCK_POINTS = [
   {
     'basePrice': 1100,
     'dateFrom': '2019-07-10T22:44',
@@ -46,4 +46,4 @@ const mockPoints = [
   },
 ];
 
-export {mockPoints};
+export { MOCK_POINTS };

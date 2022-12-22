@@ -1,4 +1,4 @@
-const mockOffers = [
+const MOCK_OFFERS = [
   {
     'type': 'taxi',
     'offers': [
@@ -66,4 +66,4 @@ const mockOffers = [
   },
 ];
 
-export {mockOffers};
+export { MOCK_OFFERS };

@@ -1,8 +1,8 @@
-import { humanizePointDate, getTemplateData } from '../utils';
+import { humanizePointDate, getDataForTemplate } from '../utils';
 import { DATE_FORMAT } from '../const';
 
 export default function createEditEventFormTemplate (templateData) {
-  const {point, currnetDestination, availableOffers} = getTemplateData(templateData);
+  const {point, currnetDestination, availableOffers} = getDataForTemplate(templateData);
 
   return (
     `<form class="event event--edit" action="#" method="post">
@@ -72,10 +72,10 @@ export default function createEditEventFormTemplate (templateData) {
         </div>
 
         <div class="event__field-group  event__field-group--destination">
-          <label class="event__label  event__type-output" for="event-destination-1">
+          <label class="event__label  event__type-output" for="event-destination-${point.id}">
             ${point.type}
           </label>
-          <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="${currnetDestination.name}" list="destination-list-1">
+          <input class="event__input  event__input--destination" id="event-destination-${point.id}" type="text" name="event-destination" value="${currnetDestination.name}" list="destination-list-1">
           <datalist id="destination-list-1">
             <option value="Amsterdam"></option>
             <option value="Geneva"></option>
