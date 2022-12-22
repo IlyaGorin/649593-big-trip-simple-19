@@ -110,7 +110,7 @@ export default function createEditEventFormTemplate (templateData) {
           <h3 class="event__section-title  event__section-title--offers">Offers</h3>
 
           <div class="event__available-offers">
-          ${availableOffers !== undefined ? availableOffers.offers.map((offer, index) => {
+      ${availableOffers !== undefined ? availableOffers.offers.map((offer, index) => {
       const isChecked = point.offers.includes(offer.id) ? 'checked' : '';
 
       return (
