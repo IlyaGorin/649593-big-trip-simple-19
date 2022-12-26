@@ -75,7 +75,6 @@ export default class TripEventsPresenter {
       render(this.#noEventsComponent, this.#tripEventsContainer);
       return;
     }
-
     render(this.#filtersFormComponent, this.#filtersFormContainer);
     render(this.#sortFormComponent, this.#tripEventsContainer);
     render(this.#eventListComponent, this.#tripEventsContainer);
