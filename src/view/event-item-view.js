@@ -1,31 +1,36 @@
-import { createElement } from '../render';
+import AbstractView from '../framework/view/abstract-view';
 import createEventItemTemplate from '../templates/event-Item-template';
 
-export default class EventItemView {
-  #element = null;
+export default class EventItemView extends AbstractView {
   #data = {};
+  #handleRollUpButtonClick = null;
 
-  constructor({point, pointDestinations, currentOffers}) {
+  constructor({
+    point,
+    pointDestinations,
+    currentOffers,
+    onRollUpButtonClick,
+  }) {
+    super();
     this.#data = {
       point,
       pointDestinations,
       currentOffers,
     };
+
+    this.#handleRollUpButtonClick = onRollUpButtonClick;
+
+    this.element
+      .querySelector('.event__rollup-btn')
+      .addEventListener('click', this.#rollUpButtonClickHandler);
   }
 
   get template() {
     return createEventItemTemplate(this.#data);
   }
 
-  get element() {
-    if(!this.#element) {
-      this.#element = createElement(this.template);
-    }
-
-    return this.#element;
-  }
-
-  removeElement() {
-    this.#element = null;
-  }
+  #rollUpButtonClickHandler = (evt) => {
+    evt.preventDefault();
+    this.#handleRollUpButtonClick();
+  };
 }

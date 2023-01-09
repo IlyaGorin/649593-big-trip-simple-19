@@ -1,4 +1,4 @@
-import { render } from '../render';
+import { render, replace } from '../framework/render';
 import FiltersFormView from '../view/filters-form-view';
 import EventListView from '../view/event-list-view';
 import EventItemView from '../view/event-item-view';
@@ -16,60 +16,57 @@ export default class TripEventsPresenter {
   #pointsModel = {};
   #mockData = {};
 
-  constructor({tripEventsContainer, filtersFormContainer, pointsModel}){
+  constructor({ tripEventsContainer, filtersFormContainer, pointsModel }) {
     this.#filtersFormContainer = filtersFormContainer;
     this.#tripEventsContainer = tripEventsContainer;
     this.#pointsModel = pointsModel;
   }
 
-  #renderEvent (point) {
+  #renderEvent(point) {
+    const escKeyDownHandler = (evt) => {
+      if (evt.key === 'Escape' || evt.key === 'Esc') {
+        evt.preventDefault();
+        replaceFormToPoint.call(this);
+        document.removeEventListener('keydown', escKeyDownHandler);
+      }
+    };
+
     const eventComponent = new EventItemView({
       point,
       pointDestinations: this.#mockData.destinations,
-      currentOffers: this.#mockData.offers
+      currentOffers: this.#mockData.offers,
+      onRollUpButtonClick: () => {
+        replacePointToForm.call(this);
+        document.addEventListener('keydown', escKeyDownHandler);
+      },
     });
 
     const editEventFormComponent = new EditEventFormView({
       point,
       pointDestinations: this.#mockData.destinations,
-      currentOffers: this.#mockData.offers
-    });
-
-    const replacePointToForm = () => {
-      this.#eventListComponent.element.replaceChild(editEventFormComponent.element, eventComponent.element);
-    };
-
-    const replaceFormToPoint = () => {
-      this.#eventListComponent.element.replaceChild(eventComponent.element, editEventFormComponent.element);
-    };
-
-    const escKeyDownHandler = (evt) => {
-      if (evt.key === 'Escape' || evt.key === 'Esc') {
-        evt.preventDefault();
-        replaceFormToPoint();
+      currentOffers: this.#mockData.offers,
+      onRollUpButtonClick: () => {
+        replaceFormToPoint.call(this);
         document.removeEventListener('keydown', escKeyDownHandler);
-      }
-    };
-
-    eventComponent.element.querySelector('.event__rollup-btn').addEventListener('click', () => {
-      replacePointToForm();
-      document.addEventListener('keydown', escKeyDownHandler);
+      },
+      onSaveButtonClick: () => {
+        replaceFormToPoint.call(this);
+        document.removeEventListener('keydown', escKeyDownHandler);
+      },
     });
 
-    editEventFormComponent.element.querySelector('.event__rollup-btn').addEventListener('click', () => {
-      replaceFormToPoint();
-    });
+    function replacePointToForm () {
+      replace(editEventFormComponent, eventComponent);
+    }
 
-    editEventFormComponent.element.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-      replaceFormToPoint();
-      document.removeEventListener('keydown', escKeyDownHandler);
-    });
+    function replaceFormToPoint () {
+      replace(eventComponent, editEventFormComponent);
+    }
 
     render(eventComponent, this.#eventListComponent.element);
   }
 
-  #renderEventsList (data) {
+  #renderEventsList(data) {
     if (data.points.length === 0) {
       render(this.#filtersFormComponent, this.#filtersFormContainer);
       render(this.#noEventsComponent, this.#tripEventsContainer);
