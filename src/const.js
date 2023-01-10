@@ -5,12 +5,4 @@ const DATE_FORMAT = {
   FORM: 'DD/MM/YY h:mm',
 };
 
-const RenderPosition = {
-  BEFOREBEGIN: 'beforebegin',
-  AFTERBEGIN: 'afterbegin',
-  BEFOREEND: 'beforeend',
-  AFTEREND: 'afterend',
-};
-
-
-export {POINTS_COUNT, DATE_FORMAT, RenderPosition};
+export {POINTS_COUNT, DATE_FORMAT,};

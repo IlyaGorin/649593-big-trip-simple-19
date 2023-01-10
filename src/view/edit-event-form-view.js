@@ -1,31 +1,45 @@
-import { createElement } from '../render';
+import AbstractView from '../framework/view/abstract-view';
 import createEditEventFormTemplate from '../templates/edit-event-form-template';
 
-export default class EditEventFormView {
-  #element = null;
+export default class EditEventFormView extends AbstractView {
   #data = {};
+  #handleRollUpButtonClick = null;
+  #handleSaveButtonClick = null;
 
-  constructor({point, pointDestinations, currentOffers}) {
+  constructor({
+    point,
+    pointDestinations,
+    currentOffers,
+    onRollUpButtonClick,
+    onSaveButtonClick,
+  }) {
+    super();
     this.#data = {
       point,
       pointDestinations,
       currentOffers,
     };
+    this.#handleRollUpButtonClick = onRollUpButtonClick;
+    this.#handleSaveButtonClick = onSaveButtonClick;
+
+    this.element
+      .querySelector('.event__rollup-btn')
+      .addEventListener('click', this.#rollUpButtonClickHandler);
+
+    this.element.addEventListener('submit', this.#submitFormHandler);
   }
 
   get template() {
     return createEditEventFormTemplate(this.#data);
   }
 
-  get element() {
-    if(!this.#element) {
-      this.#element = createElement(this.template);
-    }
+  #rollUpButtonClickHandler = (evt) => {
+    evt.preventDefault();
+    this.#handleRollUpButtonClick();
+  };
 
-    return this.#element;
-  }
-
-  removeElement() {
-    this.#element = null;
-  }
+  #submitFormHandler = (evt) => {
+    evt.preventDefault();
+    this.#handleSaveButtonClick();
+  };
 }
