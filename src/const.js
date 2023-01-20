@@ -1,8 +1,15 @@
 const POINTS_COUNT = 3;
 
-const DATE_FORMAT = {
+const DateFormat = {
   POINT: 'h:mm',
   FORM: 'DD/MM/YY h:mm',
+  DAY: 'DD MMM YY',
 };
 
-export {POINTS_COUNT, DATE_FORMAT,};
+const SortType = {
+  DEFAULT: 'default',
+  PRICE: 'price',
+  DATE: 'date',
+};
+
+export { POINTS_COUNT, DateFormat, SortType };
