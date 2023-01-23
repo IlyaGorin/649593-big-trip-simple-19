@@ -1,5 +1,5 @@
 import { humanizePointDate, getDataForTemplate } from '../utils';
-import { DATE_FORMAT } from '../const';
+import { DateFormat } from '../const';
 
 export default function createEventItemTemplate (templateData) {
   const {point, currnetDestination, availableOffers} = getDataForTemplate(templateData);
@@ -7,16 +7,16 @@ export default function createEventItemTemplate (templateData) {
   return (
     `<li class="trip-events__item">
       <div class="event">
-        <time class="event__date" datetime="2019-03-18">MAR 18</time>
+        <time class="event__date" datetime="2019-03-18">${humanizePointDate(point.dateFrom, DateFormat.DAY)}</time>
         <div class="event__type">
           <img class="event__type-icon" src="img/icons/${point.type}.png" alt="Event type icon" width="42" height="42">
         </div>
         <h3 class="event__title">${point.type} ${currnetDestination.name}</h3>
         <div class="event__schedule">
           <p class="event__time">
-            <time class="event__start-time" datetime="2019-03-18T10:30">${humanizePointDate(point.dateFrom, DATE_FORMAT.POINT)}</time>
+            <time class="event__start-time" datetime="2019-03-18T10:30">${humanizePointDate(point.dateFrom, DateFormat.POINT)}</time>
             —
-            <time class="event__end-time" datetime="2019-03-18T11:00">${humanizePointDate(point.dateTo, DATE_FORMAT.POINT)}</time>
+            <time class="event__end-time" datetime="2019-03-18T11:00">${humanizePointDate(point.dateTo, DateFormat.POINT)}</time>
           </p>
         </div>
         <p class="event__price">
