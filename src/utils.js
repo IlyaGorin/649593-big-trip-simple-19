@@ -17,6 +17,7 @@ function getDataForTemplate(data) {
   const availableOffers = currentOffers.find((offer) => offer.type === type);
 
   return {
+    pointDestinations,
     point,
     currnetDestination,
     availableOffers,

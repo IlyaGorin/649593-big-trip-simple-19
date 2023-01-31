@@ -21,7 +21,7 @@ const MOCK_POINTS = [
     'basePrice': 777,
     'dateFrom': '2016-01-1T12:23',
     'dateTo': '2019-07-11T7:07:13',
-    'destination': 1,
+    'destination': 4,
     'id': '2',
     'offers': [2],
     'type': 'flight'
@@ -30,7 +30,7 @@ const MOCK_POINTS = [
     'basePrice': 555,
     'dateFrom': '2018-02-02T12:23',
     'dateTo': '2019-07-11T7:07:13',
-    'destination': 1,
+    'destination': 2,
     'id': '3',
     'offers': [1],
     'type': 'train'
@@ -39,7 +39,7 @@ const MOCK_POINTS = [
     'basePrice': 33,
     'dateFrom': '2021-03-03T12:23',
     'dateTo': '2019-07-11T7:07:13',
-    'destination': 2,
+    'destination': 3,
     'id': '4',
     'offers': [1],
     'type': 'restaurant'
