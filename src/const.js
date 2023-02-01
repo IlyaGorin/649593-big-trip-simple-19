@@ -12,4 +12,16 @@ const SortType = {
   DATE: 'date',
 };
 
-export { POINTS_COUNT, DateFormat, SortType };
+const OFFERS_TYPE = [
+  'taxi',
+  'bus',
+  'train',
+  'ship',
+  'drive',
+  'flight',
+  'check-in',
+  'sightseeing',
+  'restaurant',
+];
+
+export { POINTS_COUNT, DateFormat, SortType, OFFERS_TYPE };
